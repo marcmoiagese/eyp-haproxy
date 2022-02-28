@@ -1,0 +1,36 @@
+
+<% if defined?(@description) -%>
+#---------------------------------------------------------------------
+# <%= @description %>
+#---------------------------------------------------------------------
+<% end -%>
+frontend <%= @frontend_name %>
+  bind <%= @bind %>
+  mode <%= @mode %>
+  <%- if @tcplog -%>
+  option tcplog
+  <%- end -%>
+  <%- if @httplog -%>
+  option httplog<% if @httplog_clf %> clf<% end %>
+  <%- end -%>
+  <%- if defined?(@tcp_request_inspect_delay) -%>
+  tcp-request inspect-delay <%= @tcp_request_inspect_delay %>
+  <%- end -%>
+  <%- if defined?(@tcp_request_content_action_and_condition) -%>
+  tcp-request content <%= @tcp_request_content_action_and_condition %>
+  <%- end -%>
+  <%- if defined?(@dontlognull) -%>
+  <% if @dontlognull == false %>no <% end %>option dontlognull
+  <%- end -%>
+  <%- if @forwardfor -%>
+  option forwardfor<% if defined?(@forwardfor_except) %> except <%= @forwardfor_except %> <% end %><% if defined?(@forwardfor_header) %> header <%= @forwardfor_header %> <% end %><% if @forwardfor_ifnone %> if-none<% end %>
+  <%- end -%>
+  <%- if defined?(@http_server_close) -%>
+  <% if @http_server_close == false %>no <% end %>option http-server-close
+  <%- end -%>
+  <%- if defined?(@default_backend) -%>
+  default_backend <%= @default_backend %>
+  <%- end -%>
+  <%- if defined?(@description) -%>
+  description <%= @description %>
+  <%- end -%>

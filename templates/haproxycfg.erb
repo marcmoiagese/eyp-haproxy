@@ -1,0 +1,32 @@
+# puppet managed file
+global
+  log /dev/log	local0
+  log /dev/log	local1 notice
+  <%- if @chroot.to_s.empty? %>
+  chroot <%= @chroot %>
+  <%- end %>
+  <%- if defined?(@stats_socket) %>
+  stats socket <%= @stats_socket %> mode <%= @stats_socket_mode %> level <%= @stats_socket_level %>
+  stats timeout <%= @stats_socket_timeout %>
+  <%- end -%>
+  user <%= @user %>
+  group <%= @group %>
+  <%- if @daemon -%>
+  daemon
+  <%- end -%>
+
+  # Default SSL material locations
+  ca-base /etc/ssl/certs
+  crt-base /etc/ssl/private
+
+  # Default ciphers to use on SSL-enabled listening sockets.
+  # For more information, see ciphers(1SSL). This list is from:
+  #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+  ssl-default-bind-ciphers <%= @ssl_ciphers %>
+  ssl-default-bind-options <%= @ssl_options %>
+
+defaults
+  log	global
+  timeout connect 5000
+  timeout client  50000
+  timeout server  50000

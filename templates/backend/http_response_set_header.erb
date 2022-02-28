@@ -1,0 +1,4 @@
+  <%- if defined?(@description) -%>
+  # <%= @description %>
+  <%- end -%>
+  http-response set-header <%= @header_name %> <%= @header_value %> <% if defined?(@condition) %><% if @unless %>unless<% else %>if<% end %> <%= @condition %><% end %>

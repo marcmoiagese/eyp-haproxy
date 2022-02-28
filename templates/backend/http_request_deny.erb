@@ -1,0 +1,4 @@
+  <%- if defined?(@description) -%>
+  # <%= @description %>
+  <%- end -%>
+  http-request deny <% if defined?(@condition) %><% if @unless %>unless<% else %>if<% end %> <%= @condition %><% end %>

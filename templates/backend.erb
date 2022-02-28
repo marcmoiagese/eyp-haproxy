@@ -1,0 +1,15 @@
+
+<% if defined?(@description) -%>
+#---------------------------------------------------------------------
+# <%= @description %>
+#---------------------------------------------------------------------
+<% end -%>
+backend <%= @backend_name %>
+  mode <%= @mode %>
+  balance <%= @balance_mode %>
+  <%- if @ssl_hello_chk -%>
+  option ssl-hello-chk
+  <%- end -%>
+  <%- if defined?(@description) -%>
+  description <%= @description %>
+  <%- end -%>

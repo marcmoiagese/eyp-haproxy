@@ -1,0 +1,23 @@
+
+<% if defined?(@description) -%>
+#---------------------------------------------------------------------
+# <%= @description %>
+#---------------------------------------------------------------------
+<% end -%>
+listen <%= @stats_name %> <%= @listen %>
+  mode http
+  stats enable
+  <%- if @hide_version -%>
+  stats hide-version
+  <%- end -%>
+  stats realm <%= @realm %>
+  stats uri <%= @stats_uri %>
+  <%- if defined?(@refresh) -%>
+  stats refresh <%= @refresh %>
+  <%- end -%>
+  <%- if @show_node -%>
+  stats show-node
+  <%- end -%>
+  <%- if defined?(@password) -%>
+  stats auth <%= @username %>:<%= @password %>
+  <%- end -%>
